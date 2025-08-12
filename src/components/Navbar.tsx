@@ -17,36 +17,36 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white/95 backdrop-blur-sm border-b border-border sticky top-0 z-50 shadow-sm">
-      <div className="container-center">
-        <div className="flex justify-between items-center h-16">
+      <div className="container- left">
+        <div className="flex justify-between items-center h-30">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img
               src="https://lh3.googleusercontent.com/p/AF1QipOMrbIn3bPhaQz4wkd5M9QwsBr36qZxa5ym2lSU=w141-h118-n-k-no-nu"
               alt="MNR Logo"
-              className="w-10 h-10 rounded-lg object-cover"
+              className="w-20 h-20 rounded-lg object-cover"
             />
             <div>
-              <span className="text-xl font-bold text-premium-gray">MNR</span>
-              <span className="text-sm text-muted-foreground block -mt-1">
+              <span className="text-2xl font-bold text-premium-gray">MNR</span>
+              <span className="text-base text-muted-foreground block -mt-1">
                 Real Estate
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10 ml-auto text-lg">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="flex items-center space-x-1 text-foreground hover:text-primary transition-colors duration-200 font-medium"
+                className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors duration-200 font-semibold"
               >
-                <item.icon className="w-4 h-4" />
+                <item.icon className="w-5 h-5" />
                 <span>{item.name}</span>
               </Link>
             ))}
-            <Button variant="default" className="btn-hero">
+            <Button variant="default" className="btn-hero text-lg px-6 py-2">
               Get Started
             </Button>
           </div>

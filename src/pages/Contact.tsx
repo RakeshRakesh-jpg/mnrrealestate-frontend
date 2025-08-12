@@ -59,7 +59,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['info@mnrealestate.com', 'support@mnrealestate.com'],
+      details: ['mnrrealestate.in', 'support@mnrrealestate.in'],
       color: 'bg-luxury-gold'
     },
     {
@@ -156,7 +156,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       className="search-input"
-                      placeholder="Raki"
+                      placeholder="Full Name"
                     />
                   </div>
                   <div>
@@ -170,7 +170,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       className="search-input"
-                      placeholder="raki@example.com"
+                      placeholder="mnr@example.com"
                     />
                   </div>
                 </div>
@@ -186,7 +186,7 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className="search-input"
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="+19 8904214339"
                     />
                   </div>
                   <div>

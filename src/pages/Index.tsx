@@ -1,7 +1,11 @@
 import { Search, MapPin, Building, Users, Award, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
 import PropertyCard from '@/components/PropertyCard';
-import heroImage from '@/assets/hero-home.jpg';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Autoplay } from "swiper/modules";
+import SlidingOneByOne from '../components/SlidingOneByOne';
 
 const Index = () => {
   const featuredProperties = [
@@ -47,90 +51,58 @@ const Index = () => {
     { icon: MapPin, value: '25+', label: 'Cities Covered' }
   ];
 
+  const heroSlides = [
+    "https://housedesigninnepal.com/wp-content/uploads/2024/11/download-6.jpg.webp",
+    "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg",
+    "https://images.pexels.com/photos/29334668/pexels-photo-29334668.png",
+    "https://images.pexels.com/photos/9976121/pexels-photo-9976121.jpeg",
+    "https://images.pexels.com/photos/33259508/pexels-photo-33259508.jpeg",
+    "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg"
+  ];
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})` }}
+
+      {/* Hero Section with Auto-Sliding Slider + Overlay Content */}
+      <div className="relative w-full h-[500px]">
+        <Swiper
+          navigation
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          loop
+          modules={[Navigation, Autoplay]}
+          className="w-full h-full"
         >
-          <div className="absolute inset-0 bg-premium-gray/50"></div>
-        </div>
+          {heroSlides.map((slide, idx) => (
+            <SwiperSlide key={idx}>
+              <div
+                className="relative w-full h-[500px] bg-center bg-cover"
+                style={{ backgroundImage: `url(${slide})` }}
+              >
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
-        <div className="relative z-10 text-center text-white container-center px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Find Your <span className="text-luxury-gold">Dream</span> Home
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
-            Discover premium properties with MNR Real Estate. Your trusted partner in finding the perfect home.
-          </p>
-
-          {/* Search Bar */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 max-w-4xl mx-auto mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Location</label>
-                <input
-                  type="text"
-                  placeholder="Enter city or area"
-                  className="search-input text-gray-900"
-                />
+                {/* Hero text content */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-10">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                    Find Your Dream Home
+                  </h1>
+                  <p className="text-lg md:text-xl max-w-2xl mb-6">
+                    Explore our curated listings of premium homes, apartments, and commercial spaces across the country.
+                  </p>
+                  <Button size="lg" className="btn-hero">
+                    Start Your Search
+                  </Button>
+                </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Property Type</label>
-                <select className="search-input text-gray-900">
-                  <option>All Types</option>
-                  <option>Houses</option>
-                  <option>Apartments</option>
-                  <option>Condos</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Price Range</label>
-                <select className="search-input text-gray-900">
-                  <option>Any Price</option>
-                  <option>0 - 500k</option>
-                  <option>500k - 1M</option>
-                  <option>1M+</option>
-                </select>
-              </div>
-              <div className="flex items-end">
-                <Button className="w-full btn-hero h-12">
-                  <Search className="w-5 h-5 mr-2" />
-                  Search
-                </Button>
-              </div>
-            </div>
-          </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="btn-hero">
-              Browse Properties
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-premium-gray"
-            >
-              Learn More
-            </Button>
-          </div>
-        </div>
-      </section>
-<div className="bg-gray-100 py-2">
-  <div
-    dangerouslySetInnerHTML={{
-      __html: `<marquee behavior="scroll" direction="left" scrollamount="8" style="color: #1d4ed8; font-size: 18px; padding: 10px;">
-        Welcome to MNR Real Estate Hub! Explore premium properties at your fingertips.* Property Management * Buy, Sell, Rent, & Lease--Residential,* Commercial,* Industrial Properties  *Property Development  *Land DevelopmentConstruction & Renovation  *Sales and Marketing  *Real Estate Investment  * Real Estate Financing  * Loan Against Properties  * Land Cleaning  * Landscaping Business  * Financial Planning  * Property Marketing
-* Real Estate Agent Services  * Become a Landlord  * Legal Consultancy  * Bank Bidding  * Property on Auctions  * Residential  * Commercial  * Industrial  * Land  * Special Purpose  * Real Estate Agent  * Real Estate Broker  *Developer
+      {/* Sliding Text Section */}
+      <SlidingOneByOne />
 
 
-      </marquee>`,
-    }}
-  />
-</div>
       {/* Stats Section */}
       <section className="section-padding bg-subtle">
         <div className="container-center">
@@ -187,18 +159,9 @@ const Index = () => {
 
               <div className="space-y-4 mb-8">
                 {[
-                  {
-                    title: 'Expert Market Knowledge',
-                    desc: 'Deep understanding of local markets and trends',
-                  },
-                  {
-                    title: 'Personalized Service',
-                    desc: "Tailored solutions for every client's unique needs",
-                  },
-                  {
-                    title: 'End-to-End Support',
-                    desc: "From search to closing, we're with you every step",
-                  },
+                  { title: 'Expert Market Knowledge', desc: 'Deep understanding of local markets and trends' },
+                  { title: 'Personalized Service', desc: "Tailored solutions for every client's unique needs" },
+                  { title: 'End-to-End Support', desc: "From search to closing, we're with you every step" },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start space-x-3">
                     <div className="w-6 h-6 bg-success-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">

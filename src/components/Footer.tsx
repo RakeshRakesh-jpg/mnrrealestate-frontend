@@ -5,13 +5,13 @@ const Footer = () => {
 
   return (
     <footer className="bg-premium-gray text-white">
-      <div className="container-center section-padding">
+      <div className="container-left section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div >
-              <img src="https://lh3.googleusercontent.com/p/AF1QipOMrbIn3bPhaQz4wkd5M9QwsBr36qZxa5ym2lSU=w141-h118-n-k-no-nu" alt="MNR Logo" className="w-10 h-10 rounded-lg object-cover" />
+              <img src="https://lh3.googleusercontent.com/p/AF1QipOMrbIn3bPhaQz4wkd5M9QwsBr36qZxa5ym2lSU=w141-h118-n-k-no-nu" alt="MNR Logo" className="w-20 h-20 rounded-lg object-cover" />
               </div>
               <div>
                 <span className="text-xl font-bold">MNR</span>
@@ -94,7 +94,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-luxury-gold flex-shrink-0" />
-                <span className="text-gray-300 text-sm">mnrealestate.com</span>
+                <span className="text-gray-300 text-sm">support@mnrrealestate.in</span>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ const Footer = () => {
         <div className="border-t border-gray-600 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {currentYear} MNR Real Estate. All rights reserved.
+              © {currentYear}  MNR Real Estate. All rights reserved.
             </p>
             
             <div className="flex space-x-6">

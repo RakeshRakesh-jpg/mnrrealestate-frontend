@@ -21,18 +21,16 @@ const FloatingButtons = () => {
         </a>
 
         {/* 🟢 WhatsApp Button */}
-        <a
-          href="https://www.whatsapp.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition"
-        >
-          <img
-            src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"
-            alt="WhatsApp"
-            className="w-8 h-8"
-          />
-        </a>
+      <a href="https://wa.me/918904214339"
+      target="_blank"
+      rel="noopener noreferrer"
+       className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition"
+       >
+      <img
+       src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"
+      alt="WhatsApp"
+     className="w-8 h-8"/>
+      </a>
 
         {/* 💬 Chatbot Button */}
         <button

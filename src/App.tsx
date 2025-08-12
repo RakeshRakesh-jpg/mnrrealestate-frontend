@@ -17,6 +17,12 @@ import FloatingButtons from "./components/FloatingButtons";
 import EnquiryForm from "./components/EnquiryForm";
 import AddProperty from "./pages/AddProperty";
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+import SlidingOneByOne from './components/SlidingOneByOne';
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -30,13 +36,14 @@ const App = () => (
           <main className="flex-1">
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/properties" element={<Properties />} /> {/* ✅ Here */}
+              <Route path="/properties" element={<Properties />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/add-property" element={<AddProperty />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
+          <SlidingOneByOne />
           <FloatingButtons />
           <EnquiryForm />
           <Footer />
@@ -47,3 +54,4 @@ const App = () => (
 );
 
 export default App;
+

@@ -1,5 +1,6 @@
 import { Award, Users, Building, Target, CheckCircle, Star, Quote } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import sirImage from '@/assets/sir.jpg';
 const About = () => {
   const values = [
     {
@@ -20,17 +21,18 @@ const About = () => {
   ];
 
   const team = [
-    {
-      name: 'Mr.Ananda',
-      position: 'Founder & CEO',
-      experience: '10+ Years Experience',
-      image: '-----------------',
-      specialization: 'Luxury Properties & Investment'
-    },
+   {
+  name: 'Mr.Ananda',
+  position: 'Founder & CEO',
+  experience: '10+ Years Experience',
+  image: sirImage,
+  specialization: 'Luxury Properties & Investment'
+}
+  
     /*
     {
-      name: 'Shivaanna',
-      position: 'Head of Sales',
+      name: 'RASHMI N',
+      position: '2nd Director',
       experience: '15+ Years Experience',
       image: '-------------',
       specialization: 'Residential Sales & First-Time Buyers'
