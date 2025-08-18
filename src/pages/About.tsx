@@ -69,7 +69,7 @@ const About = () => {
 
 
   const achievements = [
-    { number: '100+', label: 'Properties Sold' },
+    { number: '70+', label: 'Properties Sold' },
     { number: '200+', label: 'Happy Clients' },
     { number: '15+', label: 'Years Experience' },
     { number: '25+', label: 'Cities Served' },

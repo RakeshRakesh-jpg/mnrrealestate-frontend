@@ -38,7 +38,7 @@ export default function SlidingOneByOne() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % items.length);
-    }, 500);
+    }, 300);
     return () => clearInterval(timer);
   }, []);
 

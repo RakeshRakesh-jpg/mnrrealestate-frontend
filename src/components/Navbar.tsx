@@ -1,5 +1,4 @@
 // src/components/Navbar.jsx
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Home, Building, Phone, Info } from 'lucide-react';
@@ -17,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white/95 backdrop-blur-sm border-b border-border sticky top-0 z-50 shadow-sm">
-      <div className="container- left">
+      <div className="container-left">
         <div className="flex justify-between items-center h-30">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
@@ -46,8 +45,14 @@ const Navbar = () => {
                 <span>{item.name}</span>
               </Link>
             ))}
-            <Button variant="default" className="btn-hero text-lg px-6 py-2">
-              Get Started
+
+            {/* Join Us Button */}
+            <Button
+              asChild
+              variant="default"
+              className="btn-hero text-lg px-6 py-2 animate-blink-colors animate-blink-opacity"
+            >
+              <Link to="/shareholders">Join Us</Link>
             </Button>
           </div>
 
@@ -78,9 +83,16 @@ const Navbar = () => {
                   <span className="font-medium">{item.name}</span>
                 </Link>
               ))}
+
+              {/* Join Us in Mobile Menu */}
               <div className="px-4 pt-2">
-                <Button variant="default" className="w-full btn-hero">
-                  Get Started
+                <Button
+                  asChild
+                  variant="default"
+                  className="w-full btn-hero"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link to="/shareholders">Join Us</Link>
                 </Button>
               </div>
             </div>

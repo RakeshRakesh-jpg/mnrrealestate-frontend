@@ -1,94 +1,127 @@
-import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
+import { useState } from "react";
+import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-    propertyType: '',
-    budget: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+    propertyType: "",
+    budget: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // In a real app, you would send this data to your backend
-    toast({
-      title: "Message Sent Successfully!",
-      description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-    });
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-      propertyType: '',
-      budget: ''
-    });
+
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toast({
+          title: "Message Sent Successfully!",
+          description:
+            "Thank you for contacting us. We'll get back to you within 24 hours.",
+        });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          propertyType: "",
+          budget: "",
+          message: "",
+        });
+      } else {
+        toast({
+          title: "Failed to send message",
+          description: "Please try again later.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: " Error sending message",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Visit Our Office',
-      details: ['1St Main 1St Cross Road, South, 8th Phase, J. P. Nagar, Bengaluru, Karnataka 560078'],
-      color: 'bg-primary'
+      title: "Visit Our Office",
+      details: [
+        "1St Main 1St Cross Road, South, 8th Phase, J. P. Nagar, Bengaluru, Karnataka 560078",
+      ],
+      color: "bg-primary",
     },
     {
       icon: Phone,
-      title: 'Call Us',
-      details: ['+19 8904214339', '+19 999 000 5663'],
-      color: 'bg-success-green'
+      title: "Call Us",
+      details: ["+19 8904214339", "+19 999 000 5663"],
+      color: "bg-success-green",
     },
     {
       icon: Mail,
-      title: 'Email Us',
-      details: ['mnrrealestate.in', 'support@mnrrealestate.in'],
-      color: 'bg-luxury-gold'
+      title: "Email Us",
+      details: ["mnrrealestate.in", "support@mnrrealestate.in"],
+      color: "bg-luxury-gold",
     },
     {
       icon: Clock,
-      title: 'Business Hours',
-      details: ['Mon - Fri: 9:00 AM - 6:00 PM', 'Sat - Sun: 10:00 AM - 4:00 PM'],
-      color: 'bg-accent'
-    }
+      title: "Business Hours",
+      details: [
+        "Mon - Fri: 9:00 AM - 6:00 PM",
+        "Sat - Sun: 10:00 AM - 4:00 PM",
+      ],
+      color: "bg-accent",
+    },
   ];
 
   const officeLocations = [
     {
-      name: 'Main Office',
-      address: '1St Main 1St Cross Road, South, 8th Phase, J. P. Nagar, Bengaluru, Karnataka 560078',
-      phone: '+19 8904214339',
-      founder: 'Mr.Ananda'
+      name: "Main Office",
+      address:
+        "1St Main 1St Cross Road, South, 8th Phase, J. P. Nagar, Bengaluru, Karnataka 560078",
+      phone: "+19 8904214339",
+      founder: "Mr.Ananda",
     },
     {
-      name: 'Downtown Branch',
-      address: '1St Main 1St Cross Road, South, 8th Phase, J. P. Nagar, Bengaluru, Karnataka 560078',
-      phone: '+19 999 999 9992',
-      manager: 'Shaviaanna'
+      name: "Downtown Branch",
+      address:
+        "1St Main 1St Cross Road, South, 8th Phase, J. P. Nagar, Bengaluru, Karnataka 560078",
+      phone: "+19 999 999 9992",
+      manager: "Shaviaanna",
     },
     {
-      name: 'Suburban Office',
-      address: '1St Main 1St Cross Road, South, 8th Phase, J. P. Nagar, Bengaluru, Karnataka 560078',
-      phone: '+19 0000 000 66',
-      manager: 'Suchithra'
-    }
+      name: "Suburban Office",
+      address:
+        "1St Main 1St Cross Road, South, 8th Phase, J. P. Nagar, Bengaluru, Karnataka 560078",
+      phone: "+19 0000 000 66",
+      manager: "Suchithra",
+    },
   ];
 
   return (
@@ -100,7 +133,8 @@ const Contact = () => {
             Get In <span className="text-luxury-gold">Touch</span>
           </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto text-blue-200">
-            Ready to start your real estate journey? Our expert team is here to help you every step of the way.
+            Ready to start your real estate journey? Our expert team is here to
+            help you every step of the way.
           </p>
         </div>
       </section>
@@ -112,13 +146,22 @@ const Contact = () => {
             {contactInfo.map((info, index) => (
               <div key={index} className="property-card text-center">
                 <div className="p-8">
-                  <div className={`w-16 h-16 ${info.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
+                  <div
+                    className={`w-16 h-16 ${info.color} rounded-full flex items-center justify-center mx-auto mb-6`}
+                  >
                     <info.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-premium-gray mb-4">{info.title}</h3>
+                  <h3 className="text-lg font-bold text-premium-gray mb-4">
+                    {info.title}
+                  </h3>
                   <div className="space-y-1">
                     {info.details.map((detail, i) => (
-                      <p key={i} className="text-muted-foreground text-sm">{detail}</p>
+                      <p
+                        key={i}
+                        className="text-muted-foreground text-sm"
+                      >
+                        {detail}
+                      </p>
                     ))}
                   </div>
                 </div>
@@ -139,11 +182,13 @@ const Contact = () => {
                   Send Us a Message
                 </h2>
                 <p className="text-muted-foreground">
-                  Fill out the form below and we'll get back to you as soon as possible.
+                  Fill out the form below and we'll get back to you as soon as
+                  possible.
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Inputs */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-premium-gray mb-2">
@@ -175,6 +220,7 @@ const Contact = () => {
                   </div>
                 </div>
 
+                {/* Phone + Subject */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-premium-gray mb-2">
@@ -204,13 +250,16 @@ const Contact = () => {
                       <option value="buying">Buying a Property</option>
                       <option value="selling">Selling a Property</option>
                       <option value="renting">Renting a Property</option>
-                      <option value="investment">Investment Opportunities</option>
+                      <option value="investment">
+                        Investment Opportunities
+                      </option>
                       <option value="management">Property Management</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
                 </div>
 
+                {/* Property Type + Budget */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-premium-gray mb-2">
@@ -241,7 +290,7 @@ const Contact = () => {
                       className="search-input"
                     >
                       <option value="">Select budget range</option>
-                      <option value="under-500k">Under $500k</option>
+                      <option value="under-500k">Under 500k</option>
                       <option value="500k-1m">500k - 1M</option>
                       <option value="1m-2m">1M - 2M</option>
                       <option value="2m-5m">2M - 5M</option>
@@ -250,6 +299,7 @@ const Contact = () => {
                   </div>
                 </div>
 
+                {/* Message */}
                 <div>
                   <label className="block text-sm font-medium text-premium-gray mb-2">
                     Message *
@@ -271,35 +321,40 @@ const Contact = () => {
                 </Button>
               </form>
             </div>
-            
+
             {/* Map & Office Info */}
             <div className="space-y-8">
-             {/* Map Placeholder */}
-             <div>
-             <h3 className="text-2xl font-bold text-premium-gray mb-4">Find Us</h3>
-             <div className="rounded-xl overflow-hidden">
-             <iframe
-             title="MNR Office Map"
-             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15557.012994252236!2d77.57253189388804!3d12.891430564780055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae159d2d6b23ef%3A0xe295f6f7b48d5ed7!2sMNR%20INDIA%20PRIVATE%20LIMITED!5e0!3m2!1sen!2sin!4v1753187936291!5m2!1sen!2sin"
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade">
-              </iframe>
-            </div>
-            </div>
-           
-
-              {/* Office Locations */}
+              {/* Map */}
               <div>
-                <h3 className="text-2xl font-bold text-premium-gray mb-4">Our Locations</h3>
+                <h3 className="text-2xl font-bold text-premium-gray mb-4">
+                  Find Us
+                </h3>
+                <div className="rounded-xl overflow-hidden">
+                  <iframe
+                    title="MNR Office Map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15557.012994252236!2d77.57253189388804!3d12.891430564780055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae159d2d6b23ef%3A0xe295f6f7b48d5ed7!2sMNR%20INDIA%20PRIVATE%20LIMITED!5e0!3m2!1sen!2sin!4v1753187936291!5m2!1sen!2sin"
+                    width="100%"
+                    height="300"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </div>
+
+              {/* Locations */}
+              <div>
+                <h3 className="text-2xl font-bold text-premium-gray mb-4">
+                  Our Locations
+                </h3>
                 <div className="space-y-4">
                   {officeLocations.map((location, index) => (
                     <div key={index} className="property-card">
                       <div className="p-6">
-                        <h4 className="font-semibold text-premium-gray mb-2">{location.name}</h4>
+                        <h4 className="font-semibold text-premium-gray mb-2">
+                          {location.name}
+                        </h4>
                         <div className="space-y-1 text-sm text-muted-foreground">
                           <p className="flex items-start">
                             <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
@@ -309,10 +364,18 @@ const Contact = () => {
                             <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
                             {location.phone}
                           </p>
-                          <p className="flex items-center">
-                            <MessageSquare className="w-4 h-4 mr-2 flex-shrink-0" />
-                            Manager: {location.manager}
-                          </p>
+                          {location.manager && (
+                            <p className="flex items-center">
+                              <MessageSquare className="w-4 h-4 mr-2 flex-shrink-0" />
+                              Manager: {location.manager}
+                            </p>
+                          )}
+                          {location.founder && (
+                            <p className="flex items-center">
+                              <MessageSquare className="w-4 h-4 mr-2 flex-shrink-0" />
+                              Founder: {location.founder}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -323,6 +386,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
+      
 
       {/* FAQ Section */}
       <section className="section-padding bg-subtle">
@@ -339,39 +403,67 @@ const Contact = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-premium-gray mb-2">How long does it take to buy a house?</h3>
-                <p className="text-muted-foreground text-sm">Typically 30-45 days from offer acceptance to closing, depending on financing and inspections.</p>
+                <h3 className="font-semibold text-premium-gray mb-2">
+                  How long does it take to buy a house?
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  Typically 30-45 days from offer acceptance to closing,
+                  depending on financing and inspections.
+                </p>
               </div>
               <div>
-                <h3 className="font-semibold text-premium-gray mb-2">What documents do I need to sell my property?</h3>
-                <p className="text-muted-foreground text-sm">Property deed, recent tax statements, utility bills, and any relevant property disclosures.</p>
+                <h3 className="font-semibold text-premium-gray mb-2">
+                  What documents do I need to sell my property?
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  Property deed, recent tax statements, utility bills, and any
+                  relevant property disclosures.
+                </p>
               </div>
               <div>
-                <h3 className="font-semibold text-premium-gray mb-2">Do you charge consultation fees?</h3>
-                <p className="text-muted-foreground text-sm">Initial consultations are completely free. We'll discuss your needs and provide expert advice at no cost.</p>
+                <h3 className="font-semibold text-premium-gray mb-2">
+                  Do you charge consultation fees?
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  Initial consultations are completely free. We'll discuss your
+                  needs and provide expert advice at no cost.
+                </p>
               </div>
             </div>
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-premium-gray mb-2">What areas do you serve?</h3>
-                <p className="text-muted-foreground text-sm">We serve 25+ cities across the region with specialized local market knowledge.</p>
+                <h3 className="font-semibold text-premium-gray mb-2">
+                  What areas do you serve?
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  We serve 25+ cities across the region with specialized local
+                  market knowledge.
+                </p>
               </div>
               <div>
-                <h3 className="font-semibold text-premium-gray mb-2">Can you help with investment properties?</h3>
-                <p className="text-muted-foreground text-sm">Yes, we specialize in investment opportunities and can help analyze potential returns.</p>
+                <h3 className="font-semibold text-premium-gray mb-2">
+                  Can you help with investment properties?
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  Yes, we specialize in investment opportunities and can help
+                  analyze potential returns.
+                </p>
               </div>
               <div>
-                <h3 className="font-semibold text-premium-gray mb-2">Do you offer property management?</h3>
-                <p className="text-muted-foreground text-sm">We provide comprehensive property management services for landlords and investors.</p>
+                <h3 className="font-semibold text-premium-gray mb-2">
+                  Do you offer property management?
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  We provide comprehensive property management services for
+                  landlords and investors.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
     </div>
-    
   );
 };
-
 
 export default Contact;

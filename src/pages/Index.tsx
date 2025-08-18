@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import SlidingOneByOne from '../components/SlidingOneByOne';
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const featuredProperties = [
@@ -84,7 +85,7 @@ const Index = () => {
                 {/* Hero text content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-10">
                   <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                    Find Your Dream Home
+                    “Modern Real Estate, Timeless Value. Only at MNR.”
                   </h1>
                   <p className="text-lg md:text-xl max-w-2xl mb-6">
                     Explore our curated listings of premium homes, apartments, and commercial spaces across the country.

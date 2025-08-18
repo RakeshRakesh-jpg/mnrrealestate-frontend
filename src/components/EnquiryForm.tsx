@@ -5,13 +5,36 @@ const EnquiryForm = () => {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Enquiry Submitted!");
+
+    const { name, phone, message } = form;
+
+    // WhatsApp formatted message (use \n for line breaks, then encode)
+    const finalMessage = `Enquiry Form Submission:\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n💬 Message: ${message}`;
+    const encodedMessage = encodeURIComponent(finalMessage);
+
+    // Detect if user is on mobile
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    // Build WhatsApp URL
+    const whatsappUrl = isMobile
+      ? `whatsapp://send?phone=918904214339&text=${encodedMessage}`
+      : `https://wa.me/918904214339?text=${encodedMessage}`;
+
+    // ✅ Success alert
+    alert("✅ Opening WhatsApp to send your enquiry...");
+
+    // Open WhatsApp
+    window.open(whatsappUrl, "_blank");
+
+    // Reset form & close popup
     setForm({ name: "", phone: "", message: "" });
     setOpen(false);
   };
@@ -49,10 +72,17 @@ const EnquiryForm = () => {
               className="border px-3 py-1 rounded resize-none"
               required
             ></textarea>
-            <button type="submit" className="bg-blue-600 text-white py-1 rounded hover:bg-blue-700">
+            <button
+              type="submit"
+              className="bg-blue-600 text-white py-1 rounded hover:bg-blue-700"
+            >
               Submit
             </button>
-            <button type="button" onClick={() => setOpen(false)} className="text-sm text-red-500 underline">
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="text-sm text-red-500 underline"
+            >
               Cancel
             </button>
           </form>
